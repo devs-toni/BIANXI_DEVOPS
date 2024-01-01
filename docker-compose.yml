@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: servbianxiapi
+    image: devstoni/bianxi-api:0.4.0
+    ports:
+      - '8080:8080'
+    environment:
+      - spring.profiles.active=prod
+    networks:
+      - mysqldb
+      - net
+  
+  frontend:
+    container_name: servbianxifrnt
+    image: devstoni/bianxi-front:0.1.2
+    ports:
+      - 3000:3000
+    stdin_open: true
+    networks:
+      - net
+
+networks:
+  mysqldb:
+    external: true
+  net:
+    external: false
