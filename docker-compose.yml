@@ -3,12 +3,13 @@ version: '3.8'
 services:
   backend:
     container_name: BIANXI_API_SERVICE
-    image: devstoni/bianxi-api:0.6.0
+    image: devstoni/bianxi-api:0.7.0
     ports:
       - '8080:8080'
     environment:
       - spring.profiles.active=prod
       - SERVER_PORT=$SERVER_PORT
+      - DB_HOST=$DB_HOST
       - DB_USER=$DB_USER
       - DB_PASSWORD=$DB_PASSWORD
     networks:
