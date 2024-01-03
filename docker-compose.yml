@@ -5,7 +5,7 @@ services:
     container_name: BIANXI_API_SERVICE
     image: devstoni/bianxi-api:0.7.0
     ports:
-      - '8080:8080'
+      - '$HOST_PORT:$SERVER_PORT'
     environment:
       - spring.profiles.active=prod
       - SERVER_PORT=$SERVER_PORT
@@ -18,14 +18,15 @@ services:
   
   frontend:
     container_name: BIANXI_FRONT_SERVICE
-    image: devstoni/bianxi-front:0.1.3
+    image: devstoni/bianxi-front:0.1.4
     ports:
-      - 3000:3000
+      - '$HOST_PORT:$FRONT_PORT'
     environment:
       - HOST_ENDPOINT=$HOST_ENDPOINT
       - STRIPE_VISIBLE_KEY=$STRIPE_VISIBLE_KEY
       - GOOGLE_OAUTH_KEY=$GOOGLE_OAUTH_KEY
       - NEW_USER_DISCOUNT=$NEW_USER_DISCOUNT
+      - FRONT_PORT=$FRONT_PORT
     stdin_open: true
     networks:
       - net
