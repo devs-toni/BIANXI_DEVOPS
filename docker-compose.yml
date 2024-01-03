@@ -20,7 +20,7 @@ services:
     container_name: BIANXI_FRONT_SERVICE
     image: devstoni/bianxi-front:0.1.4
     ports:
-      - '$HOST_PORT:$FRONT_PORT'
+      - '$FRONT_HOST_PORT:$FRONT_PORT'
     environment:
       - HOST_ENDPOINT=$HOST_ENDPOINT
       - STRIPE_VISIBLE_KEY=$STRIPE_VISIBLE_KEY
