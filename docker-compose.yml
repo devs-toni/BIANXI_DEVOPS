@@ -2,21 +2,29 @@ version: '3.8'
 
 services:
   backend:
-    container_name: servbianxiapi
-    image: devstoni/bianxi-api:0.5.0
+    container_name: BIANXI_API_SERVICE
+    image: devstoni/bianxi-api:0.6.0
     ports:
       - '8080:8080'
     environment:
       - spring.profiles.active=prod
+      - SERVER_PORT=$SERVER_PORT
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
     networks:
       - mysqldb
       - net
   
   frontend:
-    container_name: servbianxifrnt
-    image: devstoni/bianxi-front:0.1.2
+    container_name: BIANXI_FRONT_SERVICE
+    image: devstoni/bianxi-front:0.1.3
     ports:
       - 3000:3000
+    environment:
+      - HOST_ENDPOINT=$HOST_ENDPOINT
+      - STRIPE_VISIBLE_KEY=$STRIPE_VISIBLE_KEY
+      - GOOGLE_OAUTH_KEY=$GOOGLE_OAUTH_KEY
+      - NEW_USER_DISCOUNT=$NEW_USER_DISCOUNT
     stdin_open: true
     networks:
       - net
