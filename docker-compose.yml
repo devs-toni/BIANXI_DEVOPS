@@ -20,7 +20,7 @@ services:
     container_name: BIANXI_FRONT_SERVICE
     image: devstoni/bianxi-front:0.1.5
     ports:
-      - '$HOST_PORT:$FRONT_PORT'
+      - '$FRONT_HOST_PORT:$FRONT_PORT'
     environment:
       - REACT_APP_HOST_ENDPOINT=$BACKEND_URL
       - REACT_APP_STRIPE_VISIBLE_KEY=$STRIPE_VISIBLE_KEY
