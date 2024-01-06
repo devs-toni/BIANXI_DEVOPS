@@ -18,15 +18,14 @@ services:
   
   frontend:
     container_name: BIANXI_FRONT_SERVICE
-    image: devstoni/bianxi-front:0.1.6
+    image: devstoni/bianxi-front:0.1.7
     ports:
-      - '$FRONT_HOST_PORT:$FRONT_PORT'
+      - '$FRONT_HOST_PORT:3000'
     environment:
       - REACT_APP_API_URL=$BACKEND_URL
       - REACT_APP_STRIPE_VISIBLE_KEY=$STRIPE_VISIBLE_KEY
       - REACT_APP_GOOGLE_OAUTH_KEY=$GOOGLE_OAUTH_KEY
       - REACT_APP_NEW_USER_DISCOUNT=$NEW_USER_DISCOUNT
-      - REACT_APP_FRONT_PORT=$CLIENT_PORT
     stdin_open: true
     networks:
       - net
