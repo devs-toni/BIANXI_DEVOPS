@@ -13,7 +13,7 @@ services:
       - DB_USER=$DB_USER
       - DB_PASSWORD=$DB_PASSWORD
     networks:
-      - mysqldb
+      - mysql_net
       - net
   
   frontend:
@@ -31,7 +31,7 @@ services:
       - net
 
 networks:
-  mysqldb:
+  mysql_net:
     external: true
   net:
     external: false
