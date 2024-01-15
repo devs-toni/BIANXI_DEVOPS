@@ -1,11 +1,26 @@
 version: '3.8'
 
 services:
-  backend:
-    container_name: BIANXI_API_SERVICE
-    image: devstoni/bianxi-api:0.7.0
+
+  database:
+    container_name: bianxi-database
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
     ports:
-      - '$HOST_PORT:$SERVER_PORT'
+      - $DB_PORT:3306
+    volumes:
+      - data:/bianxi-data
+    networks:
+      - net
+      
+  backend:
+    container_name: bianxi-api
+    image: devstoni/bianxi-api:0.7.0
+    restart: unless-stopped
+    ports:
+      - $SERVER_HOST_PORT:$SERVER_PORT
     environment:
       - spring.profiles.active=prod
       - SERVER_PORT=$SERVER_PORT
@@ -13,16 +28,17 @@ services:
       - DB_USER=$DB_USER
       - DB_PASSWORD=$DB_PASSWORD
     networks:
-      - mysql_net
       - net
+    depends_on:
+      - database
   
   frontend:
-    container_name: BIANXI_FRONT_SERVICE
+    container_name: bianxi-client
     image: devstoni/bianxi-front:0.1.7
     ports:
-      - '$FRONT_HOST_PORT:3000'
+      - $CLIENT_HOST_PORT:3000
     environment:
-      - REACT_APP_API_URL=$BACKEND_URL
+      - REACT_APP_API_URL=$SERVER_URL
       - REACT_APP_STRIPE_VISIBLE_KEY=$STRIPE_VISIBLE_KEY
       - REACT_APP_GOOGLE_OAUTH_KEY=$GOOGLE_OAUTH_KEY
       - REACT_APP_NEW_USER_DISCOUNT=$NEW_USER_DISCOUNT
@@ -31,7 +47,8 @@ services:
       - net
 
 networks:
-  mysql_net:
-    external: true
   net:
     external: false
+
+volumes:
+  data:
