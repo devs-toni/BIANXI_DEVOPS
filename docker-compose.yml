@@ -18,7 +18,7 @@ services:
       
   backend:
     container_name: bianxi-api
-    image: devstoni/bianxi-api:0.8.6
+    image: devstoni/bianxi-api:0.8.7
     restart: unless-stopped
     ports:
       - $SERVER_HOST_PORT:$SERVER_PORT
@@ -35,7 +35,7 @@ services:
   
   frontend:
     container_name: bianxi-client
-    image: devstoni/bianxi-front:0.1.8
+    image: devstoni/bianxi-front:0.1.11
     restart: unless-stopped
     ports:
       - $CLIENT_HOST_PORT:3000
